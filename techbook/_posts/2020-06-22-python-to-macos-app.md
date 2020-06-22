@@ -83,3 +83,8 @@ and next, build your application:
 ```bash
 python setup.py py2app
 ```
+
+Next, try to run your app, and see if it works.
+
+Once you’re application runs correctly, and you’re happy with the results, you can share it by copying the application bundle dist/application_name.
+
