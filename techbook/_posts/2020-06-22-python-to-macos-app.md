@@ -7,7 +7,7 @@ This page explains, how to create MacOS portable application with help of python
 ```
 $ pip install -U py2app
 ```
-### Building app
+### Building App
 * Need to create setup.py file for project. Go to directory where python script "MyApplication.py" created
 ```
 $ py2applet --make-setup MyApplication.py
@@ -37,3 +37,40 @@ setup(
     setup_requires=['py2app'],
 )
 ```
+* Replace app name "MyApplication.py" with your script name in the APP variable.
+
+```
+APP = ['application_name.py']
+```
+
+Also, if your application uses some data files, like a json or a txt file, you should include it in DATA_FILES. For example:
+
+```
+DATA_FILES = ['myfile.json', 'myfile.txt']
+```
+
+* Now, compile your project in Alias mode. This will tell py2app to build an application that uses the source data files in-place. Note that this means that the application will not be portable to other machines (we’ll do that next!).
+
+```
+$ python setup.py py2app -A
+```
+You will have two new folders inside your working directory: build and dist. The first one is used for building your app (you don’t have to touch it) and the second one contains your application bundle.
+
+From the working directory, you can run your app using:
+
+```
+$ ./dist/application_name.app/Contents/MacOS/application_name
+```
+or you can find your application in Finder and open it from there (you’ll find it in dist/application_name).
+
+Once your application is running, we are ready to create the stand alone version. First remove the build and dist folders with:
+
+```
+$ rm -rf build dist
+```
+and next, build your application:
+
+```
+$ python setup.py py2app
+```
+
